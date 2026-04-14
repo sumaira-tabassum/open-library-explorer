@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Searchbar.css"
 
-const Searchbar = ({ search, onSearch, handleSearch, loading }) => {
+const Searchbar = ({ search, onSearch,  loading }) => {
   return (
     <div className='search-area'>
       <h1 className='search-heading'> Discover Stories That Stay With You</h1>
@@ -20,7 +20,7 @@ const Searchbar = ({ search, onSearch, handleSearch, loading }) => {
           value={search}
           onChange={(e) => {
             onSearch(e.target.value);
-            handleSearch(e);
+            // handleSearch(e);
           }}
           className='search-bar'
         />

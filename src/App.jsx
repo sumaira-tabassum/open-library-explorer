@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Searchbar from "./components/Searchbar";
 import Card from "./components/Card";
@@ -11,10 +11,24 @@ function App() {
   const [books, setBooks] = useState([]);
   const [visibleCount, setVisibleCount] = useState(initialBookCount);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedBook, setSelectedBook] = useState("null");
+  const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(false);
-  const handleSearch = async (e) => {
-    const value = e.target.value;
+
+  useEffect(() => {
+  if (!search) {
+    setBooks([]);
+    return;
+  }
+
+  const timer = setTimeout(() => {
+    handleSearch(search);
+  }, 500);
+
+  return () => clearTimeout(timer);
+}, [search]);
+
+  const handleSearch = async (value) => {
+    // const value = e.target.value;
     setLoading(true);
     try {
       const response = await axios.get(
@@ -41,7 +55,7 @@ function App() {
         <Searchbar
         search={search}
         onSearch={setSearch}
-        handleSearch={handleSearch}
+        // handleSearch={handleSearch}
         loading={loading}
       />
 
